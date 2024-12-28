@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zebeir</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v={{ timestamp }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to the Linguistics Quiz</h1>
+            <p>test ur self before the exam </p>
+        </header>
+
+        <form method="POST" action="/result">
+            {% for i, question in enumerate(questions) %}
+                <div class="question-block">
+                    <h3>{{ question.question }}</h3>
+                    <ul>
+                        {% for option in question.options %}
+                            <li>
+                                <input type="radio" id="q{{ i }}-{{ loop.index }}" name="question-{{ i }}" value="{{ option }}" required>
+                                <label for="q{{ i }}-{{ loop.index }}">{{ option }}</label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+            <button type="submit">Submit Answers</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguistics Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎉 Linguistics Time  🎉</h1>
+            <p>test your self over and over till you can get a full mark</p>
+        </header>
+
+        <div class="result">
+            <p class="score">You scored <strong>{{ score }}</strong> out of <strong>{{ total }}</strong>!</p>
+
+            <div class="feedback">
+                {% if score == total %}
+                    <p class="awesome">🌟 WOW! You're a linguistics master! 🌟</p>
+                    <p>You got all the answers right! Amazing!</p>
+                {% elif score > total / 2 %}
+                    <p class="good-job">🔥 Great job! You're on fire! 🔥</p>
+                    <p>You're halfway there! Keep it up!</p>
+                {% else %}
+                    <p class="try-again">🤔 Oops, not bad but you can do better! Try again! 🤔</p>
+                    <p>It's okay! Give it another go and show your skills!</p>
+                {% endif %}
+            </div>
+
+            <h3>Your Answers vs. Correct Answers</h3>
+            <ul class="answer-list">
+                {% for i, question in enumerate(questions) %}
+                    <li>
+                        <strong>Q{{ i+1 }}:</strong> {{ question['question'] }} <br>
+                        <strong>Your Answer:</strong> {{ user_answers[i] }} <br>
+                        <strong>Correct Answer:</strong> {{ correct_answers[i] }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <footer>
+            <a href="/" class="retry-button">Take the quiz again &amp; boost your score!</a>
+        </footer>
+    </div>
+</body>
+</html>
